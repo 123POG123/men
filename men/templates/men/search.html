@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Поиск{% endblock %}
+{% block content %}
+    <p>
+        Нашлось {{ result }} статей по поиску
+        <span class="fs-5">
+         <<<<< {{ query }} >>>>>
+        </span>
+    </p>
+    {% if result != 0 %}
+        <div class="row
+    row-cols-1
+    row-cols-md-3
+    row-cols-xl-5
+    g-3 row-flex">
+            {% for post in posts %}
+                <a href="{{ post.get_absolute_url }}" class="box">
+                    <div class="col box">
+                        <div class="card">
+                            {% if post.image %}
+                                <img src="{{ post.image.url }}" class="card-img-top first_people_img"
+                                     alt="{{ post.slug }}">
+                            {% else %}
+                                <img src="{% static 'men/image/no_image.png' %}" class="card-img-top first_people_img"
+                                     alt="No-image">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ post.title }}</h5>
+                                <p class="card-text">{{ post.description|truncatewords_html:10 }}</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-body-secondary">Опубликованно {{ post.create|timesince|title }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+        <div class="paginate">
+            {% include 'include/search_paginate.html' %}
+        </div>
+    {% else %}
+        <img src="{% static 'men/image/unnamed.jpg' %}" alt="">
+    {% endif %}
+{% endblock %}

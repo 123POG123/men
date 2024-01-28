@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+{% block link %}
+{% endblock %}
+
+{% block title %}
+    Добавить Статью
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="justify-content-center d-flex">
+            <h4 class="">Добавить статью</h4>
+        </div>
+        <div class="create-post">
+            <form method="post" enctype='multipart/form-data'>
+                {% csrf_token %}
+                {#                {{ form|crispy }}#}
+                {{ form.title|as_crispy_field }}
+                {{ form.cat|as_crispy_field }}
+                {{ form.description|as_crispy_field }}
+                <div class="d-flex">
+                    <div class="me-2">
+                    <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                         class="avatar img-thumbnail mw-50" alt="avatar" height=240px" width="240px">
+                    </div>
+                    <div class="mt-3">
+                        {{ form.image|as_crispy_field }}
+                    </div>
+                </div>
+                {{ form.tag|as_crispy_field }}
+                {{ form.data_of_bird|as_crispy_field }}
+
+
+                <input type="submit" class="btn btn-success mt-2" value="Добавить статью">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

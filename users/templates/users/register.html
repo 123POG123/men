@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'users/css/user_login.css' %}">
+{% endblock %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center user_log">
+        <main class="form-signin w-50 m-auto justify-content-center">
+            {% if user.is_authenticated %}
+                <div class="text-center">
+                    <img class="mb-4" src="{% static 'men/image/logo.png' %}" alt="" width="72" height="57">
+                    <h1 class="h3 mb-3 fw-normal">Вы уже зарегестрированны</h1>
+                </div>
+            {% else %}
+                <div class="text-center">
+                    <form method="post" class="">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ next }}"/>
+                        <img class="mb-4" src="{% static 'men/image/logo.png' %}" alt="" width="72" height="57">
+                        <h1 class="h3 mb-3 fw-normal">Регистрация</h1>
+                        <div class="form-floating mt-2">
+                            {{ form.username }}
+                            <label for="floatingInput">Логин</label>
+                        </div>
+{#                        <div class="form-floating mt-2">#}
+{#                            {{ form.first_name }}#}
+{#                            <label for="floatingInput">Имя</label>#}
+{#                        </div>#}
+{#                        <div class="form-floating mt-2">#}
+{#                            {{ form.last_name }}#}
+{#                            <label for="floatingInput">Фамилия</label>#}
+{#                        </div>#}
+                        <div class="form-floating mt-2">
+                            {{ form.email }}
+                            <label for="floatingInput">E-mail</label>
+                        </div>
+
+                        <div class="form-floating mt-2">
+                            {{ form.password1 }}
+                            <label for="floatingPassword">Пароль</label>
+                        </div>
+                        <div class="form-floating mt-2">
+                            {{ form.password2 }}
+                            <label for="floatingPassword">Повторите пароль</label>
+                        </div>
+                        <button class="btn btn-primary w-100 py-2 mt-2" type="submit">Зарегестрироваться</button>
+                        <p class="mt-5 mb-3 text-body-secondary">© 2017–2024</p>
+                    </form>
+                </div>
+            {% endif %}
+        </main>
+    </div>
+{% endblock %}

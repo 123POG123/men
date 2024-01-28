@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load user_tags %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'men/css/detail.css' %}">
+{% endblock %}
+
+{% block title %}{{ post.title|title }}{% endblock %}
+
+{% block content %}
+    <h2 class="mb-3">{{ post.title|title }}</h2>
+    <div class="card mb-3 rounded-0 border-0 mb-5" style="">
+        <div class="row g-0">
+            <div class="col-md-4">
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" class="img-fluid" alt="...">
+                {% else %}
+                    <img src="{% static 'men/image/no_image.png' %}" class="img-fluid" alt="...">
+                {% endif %}
+            </div>
+            <div class="col-md-8">
+                <div class="d-flex ms-3">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Карьера:</li>
+                        <li class="list-group-item">Дата рождения:</li>
+                        <li class="list-group-item">Возраст:</li>
+                        <li class="list-group-item">Место рождения:</li>
+                    </ul>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            {% if post.cat.name == 'Певцы' %}
+                                Певец
+                            {% elif post.cat.name == 'Политики' %}
+                                Политик
+                            {% elif post.cat.name == 'Спортсмены' %}
+                                Спортсмен
+                            {% elif post.cat.name == 'Актеры' %}
+                                Актёр
+                            {% endif %}
+                        </li>
+                        <li class="list-group-item">{{ post.data_of_bird|date|rjust:"10" }}</li>
+                        <li class="list-group-item">{% total_year_users post.data_of_bird|default:'Не установлено' %}</li>
+                        <li class="list-group-item">--------------------------</li>
+                        <li class="list-group-item">-----------------------</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <h5 class="card-title mb-4">Биография</h5>
+            {{ post.description }}
+        </div>
+    </div>
+{% endblock %}

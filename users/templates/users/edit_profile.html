@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load user_tags %}
+
+{% block link %}
+
+{% endblock %}
+
+{% block title %}
+    Настройка профиля
+{% endblock %}
+
+{% block content %}
+    <div class="hr"></div>
+    <div class="container bootstrap snippet">
+        <div class="row">
+            <div class="col-sm-10"><h1>{{ user.first_name }}</h1></div>
+            <div class="col-sm-2">
+                <a href="{% url 'men:home' %}" class="pull-right">
+                <img title="profile image" alt="Label" class="img-circle img-responsive"
+                     src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100">
+            </a>
+            </div>
+        </div>
+        <form class="form" method="post" id="registrationForm" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-sm-4"><!--left col-->
+
+
+                    <div class="text-center">
+                        {% if user.photo %}
+                            <img src="{{ user.photo.url }}" alt=""
+                                 class="avatar img-thumbnail">
+                        {% else %}
+                            <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                                 class="avatar img-thumbnail"
+                                 alt="avatar">
+                        {% endif %}
+                        {{ form.photo }}
+                    </div>
+                    </hr><br>
+                    <ul class="list-group">
+                        <li class="list-group-item text-muted">Активность <i class="fa fa-dashboard fa-1x"></i></li>
+                        <li class="list-group-item text-right"><span
+                                class="pull-left"><strong>Коментируемые</strong></span>
+                            13
+                        </li>
+                        <li class="list-group-item text-right"><span class="pull-left"><strong>Постов</strong></span> 37
+                        </li>
+                    </ul>
+
+                </div><!--/col-3-->
+                <div class="col-sm-8">
+                    <ul class="nav nav-tabs">
+                        <p>Профиль</p>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="home">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <div class="form-floating mt-2">
+                                    {{ form.username }}
+                                    <label for="floatingInput">Логин</label>
+                                </div>
+                                <div class="form-floating mt-2">
+                                    {{ form.email }}
+                                    <label for="floatingInput">E-mail</label>
+                                </div>
+                                <div class="form-floating mt-2">
+                                    {{ form.first_name }}
+                                    <label for="floatingInput">Имя</label>
+                                </div>
+                                <div class="form-floating mt-2">
+                                    {{ form.last_name }}
+                                    <label for="floatingInput">Фамилия</label>
+                                </div>
+                                  <div class="form-floating mt-2">
+                                     <span class="me-2">
+                                      День рождения
+                                     </span>
+                                      {{ form.date_of_bird }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <br>
+                                    <button class="btn btn-lg btn-success" type="submit"><i
+                                            class="glyphicon glyphicon-ok-sign"></i> Сохранить изменения
+                                    </button>
+                                    <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i>
+                                        Обновить
+                                    </button>
+                                </div>
+                            </div>
+                            <hr>
+                        </div><!--/tab-pane-->
+                    </div><!--/tab-pane-->
+                </div><!--/tab-content-->
+            </div><!--/col-9-->
+        </form>
+    </div><!--/row-->
+
+{% endblock %}

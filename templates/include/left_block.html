@@ -1,0 +1,51 @@
+<div class="row">
+    <ul class="mt-4 bg-primary-subtle p-0 bl-top">
+        <li class="list-group-item bg-primary-subtle p-0">
+            {% url 'men:home' as url %}
+            <a href="{{ url }}"{% if request.path == url %}
+               class="btn link-info border-0"
+            {% else %}
+               class="btn border-0"
+            {% endif %}
+               aria-current="page">Все категории</a>
+        </li>
+        <hr class="hr"/>
+        {% for cat in category %}
+            <li class="list-group-item bg-primary-subtle ps-3">
+                <a href="{{ cat.get_absolute_url }}"
+                   class="
+                   btn border-0
+                   {% if cat.id == cat_id.id %}link-info{% endif %}">
+                    {{ cat.name }}
+                </a>
+            </li>
+        {% endfor %}
+        <hr class="hr"/>
+    </ul>
+</div>
+
+<div class="row">
+    <ul class="mt-4 d-flex flex-wrap bg-primary-subtle p-0 bl-top">
+        <li class="list-group-item ms-2 bg-primary-subtle col-10">
+            <em>
+                Теги:
+            </em>
+        </li>
+        <hr class="hr"/>
+        {% for tag in tags %}
+            <li class="list-group-item bg-primary-subtle ps-3 ">
+                <a
+                        href="{{ tag.get_absolute_url }}"
+                        class="btn border-2 rounded-0 m-1 p-1 shadow
+                        {% if tag.id == tag_id.id %}
+                        link-info border-danger
+                        {% else %}
+                        border-black
+                        {% endif %}
+                             ">
+                    {{ tag.name|title }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

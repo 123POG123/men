@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'users/css/user_login.css' %}">
+{% endblock %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+
+    {% if form.non_field_errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% if form.error %}
+1
+{% endif %}
+
+    <div class="row justify-content-center user_log">
+        <main class="form-signin w-25 m-auto justify-content-center">
+            {% if user.is_authenticated %}
+                <div class="text-center">
+                    <img class="mb-4" src="{% static 'men/image/logo.png' %}" alt="" width="72" height="57">
+
+                    <h1 class="h3 mb-3 fw-normal">Вы уже авторизованы</h1>
+                </div>
+            {% else %}
+                <div class="text-center">
+                    <form method="post" class="">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ next }}"/>
+                        <img class="mb-4" src="{% static 'men/image/logo.png' %}" alt="" width="72" height="57">
+
+                        <h1 class="h3 mb-3 fw-normal">Авторизация</h1>
+                        {#                        {% if form.non_field_errors %}#}
+                        {#                            {% for error in form.non_field_errors %}#}
+                        {#                                <div class="alert alert-danger" role="alert">#}
+                        {#                                    {{ error }}#}
+                        {#                                </div>#}
+                        {#                            {% endfor %}#}
+                        {#                        {% endif %}#}
+
+                        <div class="form-floating mt-2">
+                            {{ form.username }}
+                            <label for="floatingInput">Логин</label>
+                        </div>
+                        <div class="form-floating mt-2">
+                            {{ form.password }}
+                            <label for="floatingPassword">Пароль</label>
+                        </div>
+                            <div class="form-check text-start my-3">
+                              {{ form.remember_me }}
+                              <label class="form-check-label" for="flexCheckDefault">
+                                запомнить меня
+                              </label>
+                            </div>
+                        <button class="btn btn-primary w-100 py-2 mt-2" type="submit">Войти</button>
+                        <a href="{% url 'users:password_reset' %}">Забыли пароль?</a>
+                        <div class="panel panel-default ">
+                            <div class="panel-heading mt-3">Социальные сети</div>
+                            <ul class="social-icon-style1 text-center d-flex list-unstyled ps-0">
+                                <li>
+                                    <a href="#!" class="p-2 text-danger fs-2"><i
+                                            class="bi bi-pinterest"></i>
+                                    </a>
+                                </li>
+                                <li>
+
+                                    <a href="#!" class="p-2 text-warning fs-2"><i
+                                            class="bi bi-instagram"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="p-2 text-success fs-2"><i
+                                            class="bi bi-whatsapp"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'social:begin' 'github' %}" class="p-2 text-dark fs-2">
+                                        <i class="bi bi-github"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <p class="mt-5 mb-3 text-body-secondary">© 2017–2024</p>
+                    </form>
+                </div>
+            {% endif %}
+        </main>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,92 @@
+html {
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    height: 100%;
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+.nav-color {
+    background-color: #2e2638 !important;
+}
+
+.nav-color a {
+    color: #ffffff;
+}
+
+.card-img-top {
+    width: 100%
+}
+
+.logo-img {
+    width: 60px;
+}
+
+
+.active-btn {
+    color: #11ba6c !important;
+}
+
+a:hover {
+    color: #11ba6c !important;
+}
+
+.sub-content {
+    height: inherit;
+}
+
+#btn-back-to-top {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    display: none;
+}
+
+.btn-top {
+    height: 50px;
+    width: 50px;
+}
+
+.bl-top li:first-child a {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.first_people_img {
+    max-width: 100%;
+}
+
+.content-center {
+    display: grid;
+}
+
+.row-flex {
+    flex-wrap: wrap;
+}
+
+.box {
+    display: flex;
+}
+
+.footer {
+    background-color: lightsteelblue;
+}
+.exit_icon{
+    width: 20px;
+}
+.reg_open{
+
+}
+
+.image_load{
+    /*max-height: 100px!important;*/
+    /*max-width: 100px!important;*/
+}
+

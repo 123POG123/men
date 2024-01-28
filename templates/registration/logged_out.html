@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs"><a href="{% url 'admin:index' %}">{% translate 'Home' %}</a></div>{% endblock %}
+
+{% block nav-sidebar %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="card mb-3">
+            <div class="row g-0 align-items-center">
+                <div class="col-md-6">
+                    <img src="{% static 'img/end.jpg' %}" class="img-fluid rounded-start" style="height: 100%" alt="">
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body text-center">
+                        <p>{% translate "Thanks for spending some quality time with the web site today." %}</p>
+                        <p><a class="btn btn-success " href="{% url 'login' %}">{% translate 'Log in again' %}</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
