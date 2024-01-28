@@ -130,3 +130,4 @@ class SearchListView(MenMixin, ListView):
         context['query'] = self.request.GET.get('search')
         context['result'] = result.count()
         return context
+        # Хорошая работа
