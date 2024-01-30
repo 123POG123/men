@@ -1,4 +1,5 @@
 from pathlib import Path
+from .raw_settings import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from django.urls import reverse_lazy
@@ -16,9 +17,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
+    "men.ru",
+    "localhost",
 ]
 
-INTERNAL_IPS = ["127.0.0.1"]
+INTERNAL_IPS = ["127.0.0.1", 'men.ru']
 
 # Application definition
 
@@ -38,6 +41,14 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'social_django',
+
+    "allauth",  # new
+    "allauth.account",  # new
+    "allauth.socialaccount",  # new
+    "allauth.socialaccount.providers.github",  # new
+    'django_github_tags',
+    'captcha',
+
 ]
 
 MIDDLEWARE = [
@@ -49,6 +60,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    'allauth.account.middleware.AccountMiddleware',
+
 ]
 
 ROOT_URLCONF = 'sitemen.urls'
@@ -109,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'ru-RU'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'Europe/Moscow'
 
@@ -145,11 +158,11 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.github.GithubOAuth2',
     'django.contrib.auth.backends.ModelBackend',
     'users.authentication.EmailAuthBackend',
+    "allauth.account.auth_backends.AuthenticationBackend",
 ]
 # SESSION_COOKIE_AGE = 20
 # Send E-mail
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 
 
 AUTH_USER_MODEL = 'users.User'
@@ -160,3 +173,17 @@ SOCIAL_AUTH_JSONFIELD_ENABLED = True
 # github key
 SOCIAL_AUTH_GITHUB_KEY = 'a39c49e56f39aa80109d'
 SOCIAL_AUTH_GITHUB_SECRET = '372213352965097c934b860d7f1905783d23eeba'
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.social_auth.associate_by_email',  # <--- enable this one
+    'social_core.pipeline.user.create_user',
+    # 'users.pipeline.new_users_handler',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)

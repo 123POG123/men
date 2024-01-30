@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load django_github_tags %}
 {% load user_tags %}
 
 {% block link %}
@@ -21,6 +22,9 @@
                                     {% if user.photo %}
                                         <img src="{{ user.photo.url }}" alt=""
                                              class="avatar img-thumbnail">
+                                    {% elif user.social_auth %}
+                                        <img class="avatar img-thumbnail"
+                                             src="https://github.com/{{ user.username }}.png" alt="">
                                     {% else %}
                                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="...">
                                     {% endif %}
@@ -50,7 +54,7 @@
                                             <li class="list-group-item bg-light">{{ request.user.email|default:'не заполнено' }}</li>
                                             <li class="list-group-item bg-light">{{ user.date_of_bird|date|default:'не заполнено' }}</li>
                                             <li class="list-group-item bg-light">{% total_year_users user.date_of_bird %}</li>
-                                            <li class="list-group-item bg-light">q-----------------------</li>
+                                            <li class="list-group-item bg-light"><span src="123"></span></li>
                                         </ul>
                                     </div>
                                     <ul class="social-icon-style1 d-flex list-unstyled mt-3 ps-0">
@@ -75,6 +79,7 @@
         <a href="{% url 'users:password_change' %}" class="btn btn-success">Сменить пароль</a>
         <a href="{% url 'users:profile_edit' %}" class="btn btn-success">Изменить личные данные</a>
     </section>
+    {#    <img src=""  alt="https://github.com/{{ user.email }}">#}
 {% endblock %}
 {#                                <ul class="list-unstyled mb-1-9">#}
 {#                                    <li class="mb-2"><span class="display-26 text-secondary me-2 ">Position:</span> Coach</li>#}

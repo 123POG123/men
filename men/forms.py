@@ -1,3 +1,4 @@
+from captcha.fields import CaptchaField
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
@@ -59,8 +60,7 @@ class SendUserEmailForm(forms.Form):
             'name': 'nombre',
             'id': 'nombre',
         }
-    ), required=False, label='Имя'
-    )
+    ), required=False, label='Имя')
     email = forms.EmailField(
         widget=forms.EmailInput(
             attrs={
@@ -69,9 +69,7 @@ class SendUserEmailForm(forms.Form):
                 'name': 'email',
                 'type': 'email',
                 'id': 'nombre',
-            }
-        )
-    )
+            }))
 
     comments = forms.CharField(required=False, widget=forms.Textarea(
         attrs={
@@ -79,5 +77,5 @@ class SendUserEmailForm(forms.Form):
             'rows': 5,
             'class': 'form-control',
             'placeholder': 'Сообщение',
-        }
-    ))
+        }))
+    captcha = CaptchaField()

@@ -53,12 +53,15 @@
                 <span class="badge d-flex align-items-center p-1 pe-2 text-success-emphasis bg-success-subtle border border-success-subtle rounded-pill">
                     <a href="{% url 'users:profile' %}" class="text-dark" title="Личный кабинет"
                        data-bs-toggle="tooltip" data-bs-placement="bottom" title="Личный кабинет">
-{#                        {% if request.user.photo.url %}#}
-{#                            <img class="rounded-circle me-1" width="26" height="26" src="{{ user.photo.url }}" alt="">#}
-{#                        {% else %}#}
-{#                        {% endif %}#}
+                        {% if request.user.photo.url != None %}
+                            <img class="rounded-circle me-1" width="26" height="26" src="{{ user.photo.url }}" alt="">
+                        {% elif user.social_auth %}
+                            <img class="rounded-circle me-1" width="26" height="26"
+                                 src="https://github.com/{{ user.username }}.png" alt="">
+                        {% else %}
                             <img class="rounded-circle me-1" width="26" height="26" src="https://github.com/mdo.png"
                                  alt="">
+                        {% endif %}
                         {{ request.user.first_name|title|default:request.user }}
                     </a>
                     <span class="vr mx-2"></span>
