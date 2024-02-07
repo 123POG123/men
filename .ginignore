@@ -1,4 +1,6 @@
 .venv
+.env
+/env
 /venv
 /sitemen/raw_settings.py
 .raw_settings.py

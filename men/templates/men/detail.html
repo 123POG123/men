@@ -11,7 +11,7 @@
 
 {% block content %}
     <h2 class="mb-3">{{ post.title|title }}</h2>
-    <div class="card mb-3 rounded-0 border-0 mb-5" style="">
+    <div class="card mb-3 rounded-0 border-0 mb-5">
         <div class="row g-0">
             <div class="col-md-4">
                 {% if post.image %}
@@ -43,7 +43,6 @@
                         <li class="list-group-item">{{ post.data_of_bird|date|rjust:"10" }}</li>
                         <li class="list-group-item">{% total_year_users post.data_of_bird|default:'Не установлено' %}</li>
                         <li class="list-group-item">--------------------------</li>
-                        <li class="list-group-item">-----------------------</li>
                     </ul>
                 </div>
             </div>

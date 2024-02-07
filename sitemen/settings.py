@@ -1,19 +1,23 @@
+import os
+import environ
 from pathlib import Path
-from .raw_settings import *
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 from django.urls import reverse_lazy
 
+
+env = environ.Env()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+# environ.Env.read_env(env_file=BASE_DIR / '1')
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-5j7=viv6f2!0!9r)fd1o*gmmmmy2c_x4@q7^fei++5w@dxzpj%'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
@@ -90,14 +94,21 @@ WSGI_APPLICATION = 'sitemen.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'men_db',
-        'USER': 'postgres',
-        'PASSWORD': 'qwe',
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('NAME'),
+        'USER': 'u_ser',
+        'PASSWORD': env('PASSWORD'),
+        'HOST': '127.0.0.1',
+        'PORT': env('PORT')
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'PASSWORD': env('PASSWORD'),
+#         'HOST': env('HOST'),
+#     }
+# }
 #
 
 
@@ -162,8 +173,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 # SESSION_COOKIE_AGE = 20
 # Send E-mail
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTH_USER_MODEL = 'users.User'
 
