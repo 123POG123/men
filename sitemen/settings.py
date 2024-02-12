@@ -95,21 +95,13 @@ WSGI_APPLICATION = 'sitemen.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('NAME'),
+        'NAME': 'men_dbl',
         'USER': 'u_ser',
-        'PASSWORD': env('PASSWORD'),
+        'PASSWORD': '1111',
         'HOST': '127.0.0.1',
-        'PORT': env('PORT')
+        'PORT': '5432'
     }
 }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'PASSWORD': env('PASSWORD'),
-#         'HOST': env('HOST'),
-#     }
-# }
-#
 
 
 # Password validation
@@ -197,3 +189,8 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
 )
+
+# Celery settings
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
+
