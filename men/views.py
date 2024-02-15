@@ -12,6 +12,7 @@ from django.contrib.postgres.search import TrigramSimilarity
 
 from men.forms import MenForm, SendUserEmailForm
 from men.models import Men, Category, Tags
+from men.tasks import send_feedback
 from men.utils import MenMixin
 
 
@@ -92,12 +93,16 @@ class SendEmailPageView(FormView):
         message = f'{cd.get("name")} \n ' \
                   f'{cd.get("email")} said : ' \
                   f'{cd.get("comments")}'
-        send_mail(
-            subject='hello',
-            message=message,
-            from_email='vinogradovpavel32@gmail.com',
-            recipient_list=[f'{settings.EMAIL_HOST_USER}', ], )
-        print('send')
+
+        send_feedback.delay(message)
+        # send_mail(
+        #     subject='hello',
+        #     message=message,
+        #     from_email='vinogradovpavel32@gmail.com',
+        #     recipient_list=[f'{settings.EMAIL_HOST_USER}', ], )
+        # print('send')
+
+
         return super().form_valid(form)
 
 

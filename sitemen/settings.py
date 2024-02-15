@@ -165,6 +165,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 # SESSION_COOKIE_AGE = 20
 # Send E-mail
+EMAIL_HOST_USER = 'vinogradovpavel32@gmail.com'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTH_USER_MODEL = 'users.User'
