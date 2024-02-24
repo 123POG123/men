@@ -95,11 +95,11 @@ WSGI_APPLICATION = 'sitemen.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'men_dbl',
+        'NAME': env('NAME'),
         'USER': 'u_ser',
-        'PASSWORD': '1111',
+        'PASSWORD': env('PASSWORD'),
         'HOST': '127.0.0.1',
-        'PORT': '5432'
+        'PORT': env('PORT')
     }
 }
 
